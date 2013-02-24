@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js ie6" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!-->  <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	
+	<title>Automatic Emotional Speech Recognition</title>
+	
+	<meta name="description" content="A jQuery library for modern HTML presentations">
+	<meta name="author" content="Caleb Troughton">
+	<meta name="viewport" content="width=1024, user-scalable=no">
+	
+	<!-- Core and extension CSS files -->
+	<link rel="stylesheet" href="core/deck.core.css">
+	<link rel="stylesheet" href="extensions/goto/deck.goto.css">
+	<link rel="stylesheet" href="extensions/menu/deck.menu.css">
+	<link rel="stylesheet" href="extensions/navigation/deck.navigation.css">
+	<link rel="stylesheet" href="extensions/status/deck.status.css">
+	<link rel="stylesheet" href="extensions/hash/deck.hash.css">
+	<link rel="stylesheet" href="extensions/scale/deck.scale.css">
+	
+	<!-- Style theme. More available in /themes/style/ or create your own. -->
+	<link rel="stylesheet" href="themes/style/swiss.css">
+	
+	<!-- Transition theme. More available in /themes/transition/ or create your own. -->
+	<link rel="stylesheet" href="themes/transition/horizontal-slide.css">
+	
+    <!-- Syntax highligher -->
+    <link rel="stylesheet" href="http://yandex.st/highlightjs/7.3/styles/default.min.css">
+    <script src="http://yandex.st/highlightjs/7.3/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+	<script src="modernizr.custom.js"></script>
+</head>
+
+<body class="deck-container">
+
+<!-- Begin slides -->
+<section class="slide" id="title-slide">
+    <h1>Automatic Emotional Speech Recognition</h1>
+</section>
+
+<section class="slide" id="outline">
+    <h2>Outline</h2>
+    <ul>
+        <li>Context</li>
+        <li>What it is and what it's not</li>
+        <li>Theories</li>
+        <li>How to build a recognition system</li>
+        <li>Some references</li>
+    </ul>
+</section>
+
+<section class="slide" id="">
+    <h1>Context</h1>
+</section>
+
+<section class="slide" id="context">
+    <h2>Affective Computing</h2>
+    
+    <p>New research field launched by Pr. Rosalind Picard (MIT Media Lab) in 1995</p>
+    
+    <p>In short, machines that can recognize, interpret and simulate human emotions.</p>
+    
+    <p>Why? &rarr; non-verbal cues are essential to human communication.</p>
+    
+    <div class="slide">
+    <h2>Applications</h2>
+    
+    <p>Everywhere when there's a need for HMI.</p>
+    
+    <p>Some specific applications:</p>
+    <ul>
+        <li>Stress detection for airline pilots</li>
+        <li>Social and empathic training for autistic persons</li>
+        <li>Feedback loop in therapy tools</li>
+        <li>Anger detection for call centers</li>
+        <li>Videogames (automatic difficulty adaptation...)</li>
+    </ul>
+    </div>
+</section>
+
+<section class="slide">
+    <h2>Emotional Speech is just a tiny fraction of this</h2>
+    
+    <ul>
+        <li>Facial expressions</li>
+        <li>Gestures</li>
+        <li>Emotional Speech Synthesis</li>
+        <li>Convincing virtual emotional characters / robots</li>
+        <li>...</li>
+    </ul>
+
+    <p>NB: we restrict ourselves to the detection of emotion from voice without any understanding of linguistics (only prosody)</p>
+</section>
+
+<section class="slide" id="what-it-is">
+    <h2>What it is</h2>
+    
+    <ul>
+        <li>a booming research field: teams in Europe, USA + Canada, Asia...</li>
+        <li>a work in progress: current systems are far from perfect</li>
+        <li>an attempt to translate into technology years of previous research in human sciences</li>
+        <li>something you can tinker with using available tools and databases</li>
+    </ul>
+    <section class="slide" id="">
+    <h2>What it's not</h2>
+    
+    <ul>
+        <li>an off-the-self technology that you can easily integrate in a commercial product</li>
+        <li>lie detection technology (already exists...)</li>
+        <li>terrorists detection technology (although <a href="http://spectrum.ieee.org/computing/embedded-systems/loser-bad-vibes/0">some would like it to be...</a>)</li>
+    </ul>
+    
+    <p>It raises a number of questions for sure (privacy, misuse...). Researchers are <a href="http://www.cnrs.fr/comets/IMG/pdf/02-comstic.pdf">actually thinking</a> about this (CNRS ethics comitee report, 2009, pp 20, 70)</p>
+    </section>
+</section>
+
+
+
+
+<section class="slide" id="">
+    <h1>Theories</h1>
+</section>
+
+
+<section class="slide" id="theory">
+    <h2>Long story</h2>
+    
+    <p>Emotions have been studied for a long time in human sciences, psychology and medicine</p>
+    
+    <p>Nobody agrees on emotion theory, different perspective exist:</p>
+    <ul>
+        <li>Darwin (1872): emotions are an evolutionary construction with important survival benefits</li>
+        <li>Jameson (end 19th century): strong link between bodily functions and reactions and emotions</li>
+        <li>End of 20th century: social constructivism</li>
+        <li>Ekman (1984): work on universal emotions</li>
+    </ul>
+    
+    <section class="slide">
+    <p>Darwin's book "The Expression of the Emotions in Man and Animals" is probably the most influencial book</p>
+    
+    <p>Look at it! It's <a href="http://www.gutenberg.org/ebooks/1227">freely downloadable</a> and has weird pictures of people being electrocuted (Duchenne's work)</p>
+    <img src="images/duchenne.jpg"/>
+    </section>
+</section>
+        
+<section class="slide" id="">
+    <h1>How-to</h1>
+</section>
+
+<section class="slide" id="how-to-data">
+    <h2>Data</h2>
+    <section class="slide">
+    <p>Systems try to imitate human perception</p>
+    
+    <p>&rarr; You need to know what it looks like</p>
+    
+    <p>&rarr; In practice, you use labelled data.</p>
+    </section>
+    <section class="slide">
+    <h3>You need to:</h3>
+        <ul>
+            <li>find data (usually HARD)</li>
+            <li>make it tidy (audio segmentation, BORING)</li>
+            <li>label it (always LONG)</li>
+        </ul>
+    
+    <p>Problem: this yields very little results and is very expensive</p>
+    </section>
+    <section class="slide">
+    <h3>What people do:</h3>
+        <ul>
+            <li>use very few data (BAD for learning and system performance)</li>
+            <li>use actors in lab settings (BAD because not representative)</li>
+            <li>use Amazon's Mechanical Turk to annotate (seems quite OK, very cost-effective)</li>
+        </ul>
+    
+    <p>There are some available databases, usually for research purposes (<a href="http://emotion-research.net/wiki/Databases">link</a>)</p>
+    </section>
+</section>
+
+<section class="slide" id="how-to-features">
+    <h2>Features extraction</h2>
+    <section class="slide">
+    <h3>Basics features:</h3>
+        <ul>
+            <li>frequency (pitch, MFCC...)</li>
+            <li>energy</li>
+            <li>voice quality (jitter, shimmer...)</li>
+            <li>sometimes rhythm features</li>
+        </ul>
+    
+    <img src='images\praat.jpg'/>
+    </section>
+    <section class="slide">
+    <h3>Statistics/functionals:</h3>
+        <ul>
+            <li>mean, std, kurtosis, skewness...</li>
+            <li>median, quartiles</li>
+            <li>first and second order temporal derivatives</li>
+            <li>linear prediction coefficients</li>
+            <li>frequential analysis</li>
+            <li>mad combinations of the aboves...</li>
+        </ul>
+    
+    <p>A good library for audio features extraction: <a href="http://opensmile.sourceforge.net/">openSMILE</a></p>
+    </section>
+</section>
+
+<section class="slide" id="how-to-machine-learning">
+    <h2>Automatic learning</h2>
+    
+    <section class="slide">
+    <p>We use algorithms that can handle having so much dimensions in the data</p>
+    <ul>
+        <li>SVMs are popular</li>
+        <li>Neural Networks are making a come-back with Deep-Belief Networks</li>
+        <li>a little bit of decision trees here and there (Random Forests, C4.5...), GMMs...</li>
+        <li>interestingly, not a lot of temporal modelling (HMMs)</li>
+    </ul>
+    </section>
+    
+    <section class="slide">
+    <p>Increasingly some forms of Feature Selection are used:</p>
+    <ul>
+        <li>most of the time simple filter approaches</li>
+        <li>sometimes through regularization, inside the training process</li>
+        <li>sometimes with more sophisticated methods (SFFS)</li>
+    </ul>
+    </section>
+</section>
+
+<section class="slide" id="how-to-machine-learning-advice">
+    <h2>Advice</h2>
+    
+    <ul>
+        <li>Make yourself a small database that suits your application or try experimenting with a very simple available one (<a href="http://www.expressive-speech.net/">Berlin</a> for instance)</li>
+        <li>Use simple models first (linear SVMs for instance)</li>
+        <li>Normalize your data!</li>
+        <li>Not too many features if you don't have a cluster available... a few dozen is good</li>
+    </ul>
+    
+    <p>A widely-used SVM library: <a href="http://www.csie.ntu.edu.tw/~cjlin/libsvm/">libSVM</a></p>
+</section>
+
+<section class="slide" id="how-to-real-system">
+    <h2>Building a prototype</h2>
+    
+    <p>Not too complicated when you use available tools and databases</p>
+    
+    <p>Example: PartyMixer, a project from <a href="http://www.musichackparis.org/hacks">MusicHackParis</a>, a few hours</p>
+</section>
+
+<section class="slide" id="">
+    <h1>References</h1>
+</section>
+
+<section class="slide" id="some-references">
+    <h2>Scientific papers / courses / books</h2>
+    <ul>
+        <li><a href="http://cvrr.ucsd.edu/ece285/papers/Zeng_SurveyAffectRecognition.pdf">A good review on Affect Recognition</a></li>
+        <li>A very good <a href="https://www.youtube.com/playlist?list=PLD63A284B7615313A">Caltech course</a> on Machine Learning (video, quite hard)</li>
+        <li><a href="http://cs.gmu.edu/~sean/book/metaheuristics/">Book on metaheuristics and optimization</a></li>
+    </ul>
+    
+    <h2>Tools</h2>
+    <ul>
+        <li><a href="http://trans.sourceforge.net/en/presentation.php">Transcriber</a>, for audio labelling</li>
+        <li><a href="http://www.cs.waikato.ac.nz/ml/weka/">Weka</a>, a complete machine learning toolkitlibSVM</li>
+</section>
+    
+<section class="slide" id="questions">
+    <h2>Questions?</h2>
+    
+    <section class="slide">
+    <h3>Drop me a line: <a href="mailto:cchastag@limsi.fr">cchastag@limsi.fr</a></h3>
+    </section>
+</section>
+
+<!-- deck.navigation snippet -->
+<a href="#" class="deck-prev-link" title="Previous">&#8592;</a>
+<a href="#" class="deck-next-link" title="Next">&#8594;</a>
+
+<!-- deck.status snippet -->
+<p class="deck-status">
+	<span class="deck-status-current"></span>
+	/
+	<span class="deck-status-total"></span>
+</p>
+
+<!-- deck.goto snippet -->
+<form action="." method="get" class="goto-form">
+	<label for="goto-slide">Go to slide:</label>
+	<input type="text" name="slidenum" id="goto-slide" list="goto-datalist">
+	<datalist id="goto-datalist"></datalist>
+	<input type="submit" value="Go">
+</form>
+
+<!-- deck.hash snippet -->
+<a href="." title="Permalink to this slide" class="deck-permalink">#</a>
+
+<!-- Grab CDN jQuery, with a protocol relative URL; fall back to local if offline -->
+<script src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+<script>window.jQuery || document.write('<script src="jquery-1.7.min.js"><\/script>')</script>
+
+<!-- Deck Core and extensions -->
+<script src="core/deck.core.js"></script>
+<script src="extensions/hash/deck.hash.js"></script>
+<script src="extensions/menu/deck.menu.js"></script>
+<script src="extensions/goto/deck.goto.js"></script>
+<script src="extensions/status/deck.status.js"></script>
+<script src="extensions/navigation/deck.navigation.js"></script>
+<script src="extensions/scale/deck.scale.js"></script>
+
+<!-- Initialize the deck -->
+<script>
+$(function() {
+	$.deck('.slide');
+});
+</script>
+
+</body>
+</html>
